@@ -1,15 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
 const routes = require("./routes/TaskRoute");
 const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const corsOptions = {
+    origin: [
+        "https://crud-operation-mern-frontend.vercel.app"
+    ],
+    credentials: true,
+};
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 mongoose
     .connect(process.env.MONGO_URI)
